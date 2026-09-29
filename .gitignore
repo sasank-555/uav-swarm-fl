@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Dataset (re-create with: python prepare_data.py)
+data/
+
+# Model checkpoints
+*.pt
+
+# Throwaway runs
+results/smoke_test/
