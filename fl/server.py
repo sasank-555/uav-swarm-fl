@@ -22,8 +22,10 @@ from .client import ClientUpdate, DroneClient
 class Aggregator:
     name = "base"
 
+    def __init__(self, cfg):
+        self.cfg = cfg
+
     def aggregate(self, global_state: dict, updates: list[ClientUpdate]) -> tuple[dict, dict]:
-        """Return (new_global_state, info). `info` is logged each round."""
         raise NotImplementedError
 
 
@@ -50,10 +52,12 @@ class FedAvg(Aggregator):
 AGGREGATORS = {"fedavg": FedAvg}
 
 
-def build_aggregator(name: str) -> Aggregator:
+def build_aggregator(name: str, cfg) -> Aggregator:
     if name not in AGGREGATORS:
-        raise ValueError(f"Unknown aggregator '{name}'. Available: {list(AGGREGATORS)}")
-    return AGGREGATORS[name]()
+        raise ValueError(
+            f"Unknown aggregator '{name}'. Available: {list(AGGREGATORS)}"
+        )
+    return AGGREGATORS[name](cfg)
 
 
 @torch.no_grad()
@@ -84,7 +88,7 @@ class FederatedServer:
         self.test_ds = test_ds
         self.cfg = cfg
         self.device = device
-        self.aggregator = build_aggregator(cfg.aggregator)
+        self.aggregator = build_aggregator(cfg.aggregator, cfg)
         self.rng = np.random.default_rng(cfg.seed)
         self.history: list[dict] = []
 
