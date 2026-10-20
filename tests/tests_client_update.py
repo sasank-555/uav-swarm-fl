@@ -120,3 +120,36 @@ def test_update_metadata_is_copied_from_client():
 
     assert update.link_telemetry["snr_db"] == 20.0
     assert update.context["weather"] == "clear"
+
+
+def test_seeded_local_training_is_independent_of_intervening_random_work():
+    dataset = make_dataset()
+    client = DroneClient(
+        client_id=0,
+        dataset=dataset,
+        indices=np.arange(len(dataset)),
+        cfg=make_config(),
+        device=torch.device("cpu"),
+    )
+    model = TinyClassifier()
+    first = client.local_train(model, seed=1234)
+    _ = torch.randn(1000)
+    _ = np.random.default_rng(9).normal(size=1000)
+    second = client.local_train(model, seed=1234)
+    for key in first.state_dict:
+        assert torch.equal(first.state_dict[key], second.state_dict[key])
+
+
+def test_local_training_can_repeat_data_to_match_an_optimizer_step_budget():
+    dataset = make_dataset()
+    client = DroneClient(
+        client_id=-1,
+        dataset=dataset,
+        indices=np.arange(len(dataset)),
+        cfg=make_config(),
+        device=torch.device("cpu"),
+    )
+
+    update = client.local_train(TinyClassifier(), seed=7, num_steps=5)
+
+    assert update.metrics["optimizer_steps"] == 5

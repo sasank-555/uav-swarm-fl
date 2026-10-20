@@ -9,6 +9,7 @@ import torch
 import torch.nn as nn
 
 from .data import TensorImageDataset, augment_batch
+from .attacks import validate_attack
 
 
 @dataclass
@@ -51,18 +52,21 @@ class DroneClient:
 
         # Hooks for later phases.
         self.is_malicious = False
+        self.attack = "none"
         self.position = None
         self.link_telemetry: dict = {}
         self.context: dict = {}
         self.staleness: int = 0
 
     def make_malicious(self, attack: str, num_classes: int = 10) -> None:
-        """Byzantine drone. label_flip: every label c becomes (C-1-c), e.g. airplane<->truck."""
+        """Mark this drone malicious and apply any data-poisoning transform."""
+        validate_attack(attack)
+        if attack == "none":
+            return
         self.is_malicious = True
+        self.attack = attack
         if attack == "label_flip":
             self.y = (num_classes - 1) - self.y
-        else:
-            raise ValueError(f"Unknown attack '{attack}'")
 
     @property
     def num_samples(self) -> int:
@@ -74,8 +78,24 @@ class DroneClient:
             minlength=num_classes,
         ).tolist()
 
-    def local_train(self, global_model: nn.Module) -> ClientUpdate:
+    def local_train(
+        self,
+        global_model: nn.Module,
+        seed: int | None = None,
+        num_steps: int | None = None,
+    ) -> ClientUpdate:
         cfg = self.cfg
+
+        if num_steps is not None and num_steps < 1:
+            raise ValueError("num_steps must be at least 1")
+
+        # A client/round-specific seed prevents an extra trusted-root training
+        # call from changing later clients' minibatches or augmentation.
+        if seed is not None:
+            torch.manual_seed(seed)
+            np.random.seed(seed % (2**32 - 1))
+            if torch.cuda.is_available():
+                torch.cuda.manual_seed_all(seed)
 
         # Preserve the exact model state received from the server. The update
         # delta will be calculated relative to this state.
@@ -103,7 +123,10 @@ class DroneClient:
         total_correct = 0
         total_seen = 0
 
-        for _ in range(cfg.local_epochs):
+        optimizer_steps = 0
+        epochs = cfg.local_epochs if num_steps is None else None
+        epoch = 0
+        while epochs is None or epoch < epochs:
             perm = torch.randperm(n, device=self.device)
 
             for start in range(0, n, cfg.batch_size):
@@ -122,6 +145,12 @@ class DroneClient:
                 total_loss += loss.item() * len(yb)
                 total_correct += (output.argmax(1) == yb).sum().item()
                 total_seen += len(yb)
+                optimizer_steps += 1
+                if num_steps is not None and optimizer_steps >= num_steps:
+                    break
+            epoch += 1
+            if num_steps is not None and optimizer_steps >= num_steps:
+                break
 
         local_state = {
             key: value.detach().cpu().clone()
@@ -148,5 +177,6 @@ class DroneClient:
             metrics={
                 "train_loss": total_loss / total_seen,
                 "train_acc": total_correct / total_seen,
+                "optimizer_steps": optimizer_steps,
             },
         )
