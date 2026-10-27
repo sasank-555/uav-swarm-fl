@@ -30,9 +30,10 @@ writes `EARLY_ALERT.json`. It does not stop the rented instance. Recorded numeri
 divergence is valid, and poor accuracy is a review cue rather than an automatic
 stop. `EARLY_HEALTH.json` records the current state and completion milestones.
 
-A quiet thread heartbeat, `monitor-uav-context-study`, checks every 30 minutes
-during startup. It reviews the first completed batch and the first complete seed,
-then changes its own cadence to every four hours. Only clean-control learning
+A quiet thread heartbeat, `monitor-uav-context-study`, performs the next startup
+review on a 30-minute schedule, then checks every two hours until the first full
+seed is complete, and every four hours thereafter. It reviews the first completed
+batch and the first complete seed. Only clean-control learning
 sanity checks are allowed at interim review: do not rank methods, tune parameters,
 or alter the fixed design from partial results. It should notify only on an
 actionable failure or final completion, and disable itself after recovery and
@@ -53,3 +54,10 @@ then computes the prespecified analysis. Completion means all 720 runs have a
 terminal summary (including explicit numerical divergence), and validation
 reports `valid: true` with 720 finite final checkpoints. An unexpected process
 failure is distinct from scientific numerical divergence.
+
+Laptop disconnection, sleep, closing Codex, or reaching the AI usage limit does
+not stop server-side training or the health guard. Local AI reviews and backups
+need the laptop/app/network; the next successful check reads continued progress
+and syncs it. Failed SSH checks make one bounded attempt, rather than retrying
+repeatedly. The GPU instance must remain running. AI reviews use allowance even
+when silent; server training and the mechanical guard do not.
