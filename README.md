@@ -381,5 +381,5 @@ randomized attacker identities paired across methods, and a prespecified paired
 stress interaction with a 1 pp practical threshold.
 
 See [the study protocol](docs/CONTEXT_STUDY.md) for commands, analysis rules,
-limitations, and completed local pilot validation. The final GPU study remains
-pending; pilot accuracy is not evidence of a research advantage.
+limitations, and completed local pilot validation. The full A100 GPU study is running; final results remain pending. Pilot accuracy
+is not evidence of a research advantage.

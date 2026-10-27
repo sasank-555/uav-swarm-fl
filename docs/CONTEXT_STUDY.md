@@ -1,6 +1,7 @@
 # Controlled context study
 
-Status: implementation and local pipeline pilots complete; full GPU evaluation pending.
+Status: implementation and pilots validated; the full 720-run A100 study is running.
+See [run state](GPU_RUN_STATE.md) for the pinned source, recovery location, and monitoring policy.
 The earlier 432-run benchmark is superseded and cannot establish current defense rankings.
 
 ## Question and fixed design

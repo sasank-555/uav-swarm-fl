@@ -1,0 +1,41 @@
+# Full GPU study run state
+
+Launched 27 October 2026 on the supplied NVIDIA A100-SXM4-40GB instance.
+Initial throughput indicates approximately 20–30 hours; this is preliminary and
+not an uptime or completion guarantee. Eight workers are active under supervisor.
+
+- SSH: `ssh -p 13378 root@212.13.234.23`
+- Project: `/workspace/uav-context-study`
+- Python: `/venv/main/bin/python`
+- Supervisor: `uav_context_study`
+- Remote outputs: `/workspace/uav-context-study/results/context_final`
+- Local recovery: `results/context_final_gpu`
+- Pinned training source: `485fa9f3fda70cc7b54a1871f677654ce95469d5`
+- Training source SHA-256: `98a13e85169f56b05e627add6720b9f57cfc9b0bc88fc9137cd4325114947116`
+- Full dataset SHA-256: `ebd37adf1cdd972d382b420ebefd070c9db63116626c24338ab1489af78f37ee`
+- Prepared trace SHA-256: `68785bd1d5c03ef6e08b0bb46595aca785498f461ee0e48c40fbbeb921381a60`
+
+The source archive and dependency/hardware records are backed up locally. The
+small `context_status.py` helper was added after pinning and is read-only; it is
+not training code. Both machines passed 37 tests. All 144 CPU pilot checkpoints
+and all 12 CUDA preflight checkpoints passed artifact validation, with matching
+paired client partitions and FLTrust optimizer-step checks where applicable.
+
+A quiet thread heartbeat, `monitor-uav-context-study`, checks every four hours.
+It should notify only on an actionable failure or final completion, and disable
+itself after recovery and analysis. Healthy progress is not a reason for another
+message or an accuracy analysis. Local scheduling requires the computer and app
+to remain available. Training itself is managed independently by supervisor.
+
+The instance has no persistent workspace volume. Incremental backups omit model
+checkpoints during training; final recovery includes all checkpoints. Preserve
+the original study manifest unchanged. Analysis and artifact-validation scripts
+support copied directories without rewriting their original remote paths.
+Do not stop/recycle/destroy the instance until final results are safely copied
+and locally validated. No instruction to stop or destroy it has been given.
+
+The supervisor entry point runs the fixed final design, validates artifacts,
+then computes the prespecified analysis. Completion means all 720 runs have a
+terminal summary (including explicit numerical divergence), and validation
+reports `valid: true` with 720 finite final checkpoints. An unexpected process
+failure is distinct from scientific numerical divergence.
