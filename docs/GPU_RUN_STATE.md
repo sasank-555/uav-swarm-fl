@@ -21,11 +21,25 @@ not training code. Both machines passed 37 tests. All 144 CPU pilot checkpoints
 and all 12 CUDA preflight checkpoints passed artifact validation, with matching
 paired client partitions and FLTrust optimizer-step checks where applicable.
 
-A quiet thread heartbeat, `monitor-uav-context-study`, checks every four hours.
-It should notify only on an actionable failure or final completion, and disable
-itself after recovery and analysis. Healthy progress is not a reason for another
-message or an accuracy analysis. Local scheduling requires the computer and app
-to remain available. Training itself is managed independently by supervisor.
+A server-side supervisor process, `uav_context_guard`, checks mechanical health
+once per minute without AI calls. It checks frozen configuration/source, matched
+partitions, finite metrics/checkpoints, FLTrust root steps, progress, process errors,
+and the ideal-link equality of mask-only versus no-context. The same fault must
+appear in two consecutive checks before it stops the study process group and
+writes `EARLY_ALERT.json`. It does not stop the rented instance. Recorded numerical
+divergence is valid, and poor accuracy is a review cue rather than an automatic
+stop. `EARLY_HEALTH.json` records the current state and completion milestones.
+
+A quiet thread heartbeat, `monitor-uav-context-study`, checks every 30 minutes
+during startup. It reviews the first completed batch and the first complete seed,
+then changes its own cadence to every four hours. Only clean-control learning
+sanity checks are allowed at interim review: do not rank methods, tune parameters,
+or alter the fixed design from partial results. It should notify only on an
+actionable failure or final completion, and disable itself after recovery and
+analysis. Local scheduling requires the computer and app to remain available.
+Training and the per-minute mechanical guard run independently on the server.
+The six guard regression tests include confirmation-before-stop, transient writes,
+finite recovery from numerical divergence, and FLTrust step-budget mismatches.
 
 The instance has no persistent workspace volume. Incremental backups omit model
 checkpoints during training; final recovery includes all checkpoints. Preserve
