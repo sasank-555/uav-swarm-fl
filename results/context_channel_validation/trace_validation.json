@@ -1,0 +1,102 @@
+{
+  "trace": "data/channel_traces/deepsense23.npz",
+  "metadata": {
+    "source": "DeepSense 6G Scenario 23",
+    "source_url": "https://www.deepsense6g.net/scenarios/Scenarios%2020-29/scenario-23",
+    "source_paper_url": "https://doi.org/10.1109/OJCOMS.2025.3612320",
+    "raw_rows": 11387,
+    "power_transform": "max(64-beam vector), domain=linear, converted to relative dB",
+    "power_units": "dB relative to the dataset's arbitrary measurement scale; not dBm",
+    "power_reference_db": -7.978533678575372,
+    "distance_height_transform": "source feet multiplied by 0.3048 to metres",
+    "speed_units": "source units not asserted; values retained unchanged",
+    "beam_index_mismatches": 0,
+    "sequence_count": 35,
+    "note": "Multi-BS links are simulated from this measured single-BS reference trace."
+  },
+  "eligible_sequences": {
+    "1": 667,
+    "2": 1056,
+    "3": 805,
+    "4": 964,
+    "6": 399,
+    "8": 880,
+    "9": 276,
+    "10": 259,
+    "11": 683,
+    "16": 795,
+    "20": 262,
+    "26": 277,
+    "27": 1464,
+    "31": 428,
+    "32": 313,
+    "33": 494,
+    "34": 254
+  },
+  "simulation": {
+    "rounds": 60,
+    "clients": 10,
+    "base_stations": 3,
+    "model_parameters": 156074,
+    "model_size_mib": 0.5953750610351562,
+    "bandwidth_hz": 20000000.0,
+    "deadline_s": 2.0,
+    "trace_stride": 5,
+    "min_sequence_length": 200,
+    "note": "Absolute SNR anchors are assumptions; relative power variation is measured."
+  },
+  "sensitivity": [
+    {
+      "reference_snr_db": 5.0,
+      "virtual_bs_radius_m": 13.832496318412856,
+      "sinr_db": {
+        "p05": -1.5857666515106223,
+        "median": 8.639236839767726,
+        "p95": 13.909465277305891
+      },
+      "rate_mbps": {
+        "p05": 15.210418054726517,
+        "median": 61.09734045256981,
+        "p95": 93.56216833139031
+      },
+      "upload_latency_s": {
+        "p05": 0.053380217440464055,
+        "median": 0.08174446327011912,
+        "p95": 0.3283519146166018
+      },
+      "expected_pdr": {
+        "p05": 0.010093079865020671,
+        "median": 0.9964569665593892,
+        "p95": 0.9999817156410502
+      },
+      "deadline_miss_fraction": 0.0,
+      "handovers": 2
+    },
+    {
+      "reference_snr_db": 15.0,
+      "virtual_bs_radius_m": 13.832496318412856,
+      "sinr_db": {
+        "p05": 8.414233348489377,
+        "median": 18.639236839767726,
+        "p95": 23.90946527730589
+      },
+      "rate_mbps": {
+        "p05": 59.786489845165434,
+        "median": 124.22844641300017,
+        "p95": 158.96810044778735
+      },
+      "upload_latency_s": {
+        "p05": 0.03141742473591931,
+        "median": 0.04020309792518617,
+        "p95": 0.08353674166191126
+      },
+      "expected_pdr": {
+        "p05": 0.9955669629269694,
+        "median": 0.9999998385746048,
+        "p95": 0.9999999991698763
+      },
+      "deadline_miss_fraction": 0.0,
+      "handovers": 2
+    }
+  ]
+}

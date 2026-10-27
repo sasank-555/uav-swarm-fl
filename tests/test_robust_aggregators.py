@@ -110,3 +110,20 @@ def test_ccra_noctx_ignores_pdr_and_operational_context():
 
     assert poor_info["trust"] == ideal_info["trust"]
     assert poor_info["weights"] == ideal_info["weights"]
+
+
+def test_maskonly_preserves_delivered_values_without_telemetry():
+    cfg = FLConfig()
+    received = update(0, [1.0, 0.0], [True, False])
+    # The second coordinate was lost, not a delivered zero.
+    full = update(1, [1.0, 1.0])
+    root = torch.tensor([1.0, 1.0])
+    masked, info = build_aggregator("ccra_maskonly", cfg).aggregate([received, full], root)
+    unmasked, _ = build_aggregator("ccra_noctx", cfg).aggregate([received, full], root)
+    assert masked[1].item() == pytest.approx(1.0)
+    assert unmasked[1].item() < 1.0
+    received["tel"] = {"sinr_db": -20.0, "pdr": 0.001}
+    received["ctx"] = {"reliability": 0.001, "handover": True, "distance_m": 1e6}
+    perturbed, other_info = build_aggregator("ccra_maskonly", cfg).aggregate([received, full], root)
+    assert torch.equal(masked, perturbed)
+    assert info["trust"] == other_info["trust"]

@@ -232,9 +232,10 @@ class CCRA:
     """
     name = "ccra"
 
-    def __init__(self, cfg, use_context: bool = True):
+    def __init__(self, cfg, use_context: bool = True, use_mask: bool | None = None):
         self.cfg = cfg
         self.use_context = use_context
+        self.use_mask = use_context if use_mask is None else use_mask
         self.trust: dict[int, float] = {}
 
     needs_root = True
@@ -243,7 +244,7 @@ class CCRA:
         cfg = self.cfg
         use_context = self.use_context
         D = torch.stack([u["delta"] for u in updates])                 # K x P
-        M = (torch.stack([u["mask"] for u in updates]) if use_context
+        M = (torch.stack([u["mask"] for u in updates]) if self.use_mask
              else torch.ones_like(D, dtype=torch.bool))
         n = torch.tensor([u["n"] for u in updates], dtype=torch.float32)
 
@@ -329,4 +330,6 @@ def build_aggregator(name: str, cfg):
         return CCRA(cfg, use_context=True)
     if name == "ccra_noctx":  # ablation: CCRA without channel context
         return CCRA(cfg, use_context=False)
+    if name == "ccra_maskonly":  # retain erasure handling, remove telemetry
+        return CCRA(cfg, use_context=False, use_mask=True)
     raise ValueError(f"Unknown aggregator '{name}'")

@@ -43,7 +43,7 @@ class FLConfig:
 
     # --- aggregation ---
     # fedavg | cosavg | median | trimmed_mean | krum | multi_krum | fltrust
-    # | ccra (ours) | ccra_noctx (ablation)
+    # | ccra (ours) | ccra_noctx | ccra_maskonly (ablation)
     aggregator: str = "fedavg"
     ccra_beta: float = 0.5  # reputation memory
     ccra_gate: float = 0.3  # drones below this trust are excluded

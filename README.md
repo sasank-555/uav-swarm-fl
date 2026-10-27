@@ -369,3 +369,17 @@ validation script's 5–25 dB sensitivity sweep before interpreting results.
 | `run_experiments.py` | Resumable clean/attack × channel × defense experiment matrix |
 | `analyze_benchmark.py` | Multi-seed mean/standard-deviation report |
 | `plot_benchmark.py` | Accuracy heatmap and honest-rejection/attacker-acceptance trade-off plot |
+
+### Controlled context study (next evaluation)
+
+The merged methodology fixes are now followed by a focused study with a new
+`ccra_maskonly` ablation. This separates delivered-packet handling from SINR and
+operational telemetry. The final default is 720 runs: six methods, clean plus
+three attacks, three controlled HFL channel conditions, ten paired seeds, and
+100 rounds. It uses digital packet erasures without additive parameter noise,
+randomized attacker identities paired across methods, and a prespecified paired
+stress interaction with a 1 pp practical threshold.
+
+See [the study protocol](docs/CONTEXT_STUDY.md) for commands, analysis rules,
+limitations, and completed local pilot validation. The final GPU study remains
+pending; pilot accuracy is not evidence of a research advantage.
