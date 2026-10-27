@@ -9,7 +9,7 @@ from pathlib import Path
 
 import numpy as np
 
-from run_context_study import completed, read_json, write_json
+from run_context_study import completed, job_directory, read_json, write_json
 
 COMPARISONS = [
     ("ccra", "ccra_maskonly", "telemetry"),
@@ -45,9 +45,9 @@ def classify(estimate, threshold_pp):
     return "inconclusive at the predefined practical threshold"
 
 
-def run_metrics(job, chance):
+def run_metrics(job, chance, root=None):
     cfg = job["config"]
-    directory = Path(cfg["out_dir"]) / cfg["name"]
+    directory = job_directory(job, root)
     summary = read_json(directory / "summary.json")
     history = read_json(directory / "history.json")
     acc = {row["round"]: row["test_acc"] for row in history if "test_acc" in row}
@@ -84,10 +84,10 @@ def analyze(root, chance=0.1, allow_incomplete=False):
         if key in configs:
             raise ValueError(f"duplicate study job: {key}")
         configs[key] = cfg
-        if not completed(job):
+        if not completed(job, root):
             missing.append(list(key))
             continue
-        rows.append(run_metrics(job, chance))
+        rows.append(run_metrics(job, chance, root))
     if missing and not allow_incomplete:
         raise ValueError(f"{len(missing)} missing/incomplete jobs; finish the study or use --allow-incomplete")
     if not rows:

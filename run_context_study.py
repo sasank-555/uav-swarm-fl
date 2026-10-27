@@ -101,10 +101,17 @@ def build_jobs(args, data_dir):
     return jobs
 
 
-def completed(job):
+def job_directory(job, root=None):
+    cfg = job["config"]
+    if root is not None:
+        return Path(root) / f"seed{job['seed']}" / cfg["name"]
+    return Path(cfg["out_dir"]) / cfg["name"]
+
+
+def completed(job, root=None):
     """Never reuse a crashed run just because history.json happens to exist."""
     cfg = job["config"]
-    directory = Path(cfg["out_dir"]) / cfg["name"]
+    directory = job_directory(job, root)
     try:
         if read_json(directory / "config.json") != cfg:
             return False

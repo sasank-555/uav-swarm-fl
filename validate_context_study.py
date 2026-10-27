@@ -9,7 +9,7 @@ from pathlib import Path
 import numpy as np
 import torch
 
-from run_context_study import completed, digest, read_json, write_json
+from run_context_study import completed, digest, job_directory, read_json, write_json
 
 
 def validate(root):
@@ -19,9 +19,9 @@ def validate(root):
     counts = defaultdict(int)
     for job in manifest["jobs"]:
         cfg = job["config"]
-        directory = Path(cfg["out_dir"]) / cfg["name"]
+        directory = job_directory(job, root)
         name = f"seed{job['seed']}/{cfg['name']}"
-        if not completed(job):
+        if not completed(job, root):
             problems.append(f"incomplete: {name}")
             continue
         summary = read_json(directory / "summary.json")

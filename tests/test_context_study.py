@@ -121,3 +121,16 @@ def test_practical_conclusion_requires_precision_and_replication():
     assert classify({"n_seeds": 10, "ci95_pp": [-0.2, 0.3]}, 1.0) == "effect bounded within the predefined negligible range"
     assert classify({"n_seeds": 10, "ci95_pp": [-0.2, 2.0]}, 1.0).startswith("inconclusive")
     assert classify({"n_seeds": 2, "ci95_pp": [2, 3]}, 1.0) == "insufficient replication"
+
+
+def test_copied_study_can_be_analyzed_without_rewriting_provenance(tmp_path):
+    import shutil
+    original = tmp_path / "remote"
+    job = save_run(original, 41, "ipm_hfl_trace", "ccra", 0.5)
+    write_json(original / "study_manifest.json", {"profile": "pilot", "seeds": [41], "jobs": [job]})
+    copied = tmp_path / "local"
+    shutil.copytree(original, copied)
+    shutil.rmtree(original)
+    assert not completed(job)
+    assert completed(job, copied)
+    assert analyze(copied)["terminal_runs"] == 1
