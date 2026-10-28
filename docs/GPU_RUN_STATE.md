@@ -1,5 +1,11 @@
 # Full GPU study run state
 
+Completed and validated on 28 October 2026: 720/720 terminal runs, 720 finite
+checkpoints, ten paired partitions, zero artifact problems, 67 explicit numerical
+divergences, and no unexpected process failure logs. The local copy passed the
+same validation and analysis; the remote and local reports/checkpoint hash lists
+match. The GPU instance is idle and can be stopped after review.
+
 Launched 27 October 2026 on the supplied NVIDIA A100-SXM4-40GB instance.
 Initial throughput indicates approximately 20–30 hours; this is preliminary and
 not an uptime or completion guarantee. Eight workers are active under supervisor.
@@ -46,8 +52,8 @@ The instance has no persistent workspace volume. Incremental backups omit model
 checkpoints during training; final recovery includes all checkpoints. Preserve
 the original study manifest unchanged. Analysis and artifact-validation scripts
 support copied directories without rewriting their original remote paths.
-Do not stop/recycle/destroy the instance until final results are safely copied
-and locally validated. No instruction to stop or destroy it has been given.
+Final results have been safely copied and locally validated. The instance can
+be stopped to end GPU charges; do not destroy it without a separate decision.
 
 The supervisor entry point runs the fixed final design, validates artifacts,
 then computes the prespecified analysis. Completion means all 720 runs have a
