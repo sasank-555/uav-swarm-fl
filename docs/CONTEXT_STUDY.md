@@ -1,7 +1,7 @@
 # Controlled context study
 
-Status: implementation and pilots validated; the full 720-run A100 study is running.
-See [run state](GPU_RUN_STATE.md) for the pinned source, recovery location, and monitoring policy.
+Status: 720-run A100 study completed and validated. See the
+[final findings](../results/CONTEXT_STUDY_FINAL.md) and [run state](GPU_RUN_STATE.md).
 The earlier 432-run benchmark is superseded and cannot establish current defense rankings.
 
 ## Question and fixed design
@@ -156,10 +156,8 @@ manifest remain local. Preserve them when copying runs off the GPU.
 
 ## Remaining work
 
-1. Run the full fixed GPU study and validate all terminal artifacts and checkpoints.
-2. Report the primary interaction, absolute stressed benefit, clean cost, stability,
-   and per-cell population violations together, including unfavorable outcomes.
-3. If precision is insufficient, plan an additional seed batch before inspecting
-   its results; keep its decision separate from this fixed study.
-4. Evaluate handover frequency, root-set size, non-IID severity, and local attacker
+1. Diagnose the observed honest-client rejection under weak links and design a
+   revised rule without retuning on these ten evaluation seeds.
+2. Test any revised rule on new paired seeds and conditions.
+3. Evaluate handover frequency, root-set size, non-IID severity, and local attacker
    concentration before making broader mobility or generalization claims.
