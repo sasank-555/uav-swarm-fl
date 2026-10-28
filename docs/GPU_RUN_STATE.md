@@ -6,9 +6,8 @@ divergences, and no unexpected process failure logs. The local copy passed the
 same validation and analysis; the remote and local reports/checkpoint hash lists
 match. The GPU instance is idle and can be stopped after review.
 
-Launched 27 October 2026 on the supplied NVIDIA A100-SXM4-40GB instance.
-Initial throughput indicates approximately 20–30 hours; this is preliminary and
-not an uptime or completion guarantee. Eight workers are active under supervisor.
+Launched 27 October 2026 on the supplied NVIDIA A100-SXM4-40GB instance
+with eight workers under supervisor. The remote study has completed.
 
 - SSH: `ssh -p 13378 root@212.13.234.23`
 - Project: `/workspace/uav-context-study`
@@ -36,19 +35,12 @@ writes `EARLY_ALERT.json`. It does not stop the rented instance. Recorded numeri
 divergence is valid, and poor accuracy is a review cue rather than an automatic
 stop. `EARLY_HEALTH.json` records the current state and completion milestones.
 
-A quiet thread heartbeat, `monitor-uav-context-study`, performs the next startup
-review on a 30-minute schedule, then checks every two hours until the first full
-seed is complete, and every four hours thereafter. It reviews the first completed
-batch and the first complete seed. Only clean-control learning
-sanity checks are allowed at interim review: do not rank methods, tune parameters,
-or alter the fixed design from partial results. It should notify only on an
-actionable failure or final completion, and disable itself after recovery and
-analysis. Local scheduling requires the computer and app to remain available.
+The monitoring heartbeat was disabled after final recovery and analysis.
 Training and the per-minute mechanical guard run independently on the server.
 The six guard regression tests include confirmation-before-stop, transient writes,
 finite recovery from numerical divergence, and FLTrust step-budget mismatches.
 
-The instance has no persistent workspace volume. Incremental backups omit model
+The instance has no persistent workspace volume. Incremental backups omitted model
 checkpoints during training; final recovery includes all checkpoints. Preserve
 the original study manifest unchanged. Analysis and artifact-validation scripts
 support copied directories without rewriting their original remote paths.
@@ -65,5 +57,9 @@ Laptop disconnection, sleep, closing Codex, or reaching the AI usage limit does
 not stop server-side training or the health guard. Local AI reviews and backups
 need the laptop/app/network; the next successful check reads continued progress
 and syncs it. Failed SSH checks make one bounded attempt, rather than retrying
-repeatedly. The GPU instance must remain running. AI reviews use allowance even
-when silent; server training and the mechanical guard do not.
+repeatedly. The GPU instance needed to remain running through completion. AI reviews used
+allowance even when silent; server training and the mechanical guard did not.
+
+The reviewable final report, 720-row CSV, analysis, and validation summary are
+committed under [`results/context_study`](../results/context_study/). Full
+checkpoints and logs remain in the local recovery directory.

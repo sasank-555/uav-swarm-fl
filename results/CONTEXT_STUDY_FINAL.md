@@ -3,8 +3,8 @@
 The fixed 720-run A100 study finished on 28 October 2026. All 720 runs have terminal
 records, all 720 final checkpoints are finite, and the ten paired client partitions
 match. There were 67 explicitly recorded numerical divergences; no process failures
-or unexpected CUDA errors were found. The [full local analysis](context_final_gpu/CONTEXT_ANALYSIS.md),
-[validation report](context_final_gpu/ARTIFACT_VALIDATION.json), and
+or unexpected CUDA errors were found. The [complete analysis](context_study/CONTEXT_ANALYSIS.md),
+[validation report](context_study/ARTIFACT_VALIDATION.json), and
 [study protocol](../docs/CONTEXT_STUDY.md) contain the detailed evidence.
 
 ## Prespecified result
@@ -73,4 +73,8 @@ study is needed before claiming an advantage under frequent handovers.
 The training source was pinned at `485fa9f3fda70cc7b54a1871f677654ce95469d5`.
 Its SHA-256 training-code digest, full dataset digest, and trace digest are recorded
 in the [run state](../docs/GPU_RUN_STATE.md) and the preserved local study manifest.
-The local analysis and checkpoint hash list match their validated remote copies.
+The [run-level CSV](context_study/context_runs.csv) and
+[machine-readable analysis](context_study/context_analysis.json) are committed
+with this report. The local analysis and checkpoint hash list match their
+validated remote copies. Full run logs, checkpoints, and the original manifest
+remain in the local recovery directory, `results/context_final_gpu`.

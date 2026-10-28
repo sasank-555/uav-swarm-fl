@@ -386,5 +386,5 @@ interaction was **−2.72 percentage points** (paired-seed 95% bootstrap interva
 [−3.90, −1.51]), so the current channel-telemetry mechanism made CCRA worse
 under stress. Mask-only CCRA did better: its attacked 5 dB accuracy was 49.48%
 versus full CCRA’s 45.98%. See the [final findings](results/CONTEXT_STUDY_FINAL.md)
-and [complete analysis](results/context_final_gpu/CONTEXT_ANALYSIS.md). The earlier
+and [complete analysis](results/context_study/CONTEXT_ANALYSIS.md). The earlier
 432-run benchmark remains superseded.
