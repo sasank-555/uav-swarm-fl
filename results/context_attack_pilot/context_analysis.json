@@ -1,0 +1,686 @@
+{
+  "profile": "pilot",
+  "planned_runs": 72,
+  "terminal_runs": 72,
+  "missing_jobs": [],
+  "chance_accuracy": 0.1,
+  "meaningful_effect_pp": 1.0,
+  "primary": [
+    {
+      "comparison": "telemetry",
+      "metric": "final_accuracy",
+      "scope": "interaction_stress_minus_hfl_trace",
+      "n_seeds": 2,
+      "mean_pp": -0.1499999999999998,
+      "ci95_pp": [
+        -0.2999999999999996,
+        0.0
+      ],
+      "assessment": "pilot only; no inferential conclusion"
+    }
+  ],
+  "estimates": [
+    {
+      "comparison": "telemetry",
+      "metric": "final_accuracy",
+      "scope": "alie_hfl_ideal",
+      "n_seeds": 2,
+      "mean_pp": 0.0,
+      "ci95_pp": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "comparison": "telemetry",
+      "metric": "final_accuracy",
+      "scope": "alie_hfl_trace",
+      "n_seeds": 2,
+      "mean_pp": 0.0,
+      "ci95_pp": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "comparison": "telemetry",
+      "metric": "final_accuracy",
+      "scope": "alie_hfl_trace_stress",
+      "n_seeds": 2,
+      "mean_pp": 0.0,
+      "ci95_pp": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "comparison": "telemetry",
+      "metric": "final_accuracy",
+      "scope": "sign_flip_hfl_ideal",
+      "n_seeds": 2,
+      "mean_pp": 0.0,
+      "ci95_pp": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "comparison": "telemetry",
+      "metric": "final_accuracy",
+      "scope": "sign_flip_hfl_trace",
+      "n_seeds": 2,
+      "mean_pp": 0.10000000000000009,
+      "ci95_pp": [
+        0.0,
+        0.20000000000000018
+      ]
+    },
+    {
+      "comparison": "telemetry",
+      "metric": "final_accuracy",
+      "scope": "sign_flip_hfl_trace_stress",
+      "n_seeds": 2,
+      "mean_pp": -0.19999999999999948,
+      "ci95_pp": [
+        -0.39999999999999897,
+        0.0
+      ]
+    },
+    {
+      "comparison": "telemetry",
+      "metric": "final_accuracy",
+      "scope": "attacked_suite_seed_mean",
+      "n_seeds": 2,
+      "mean_pp": -0.016666666666666566,
+      "ci95_pp": [
+        -0.03333333333333313,
+        0.0
+      ]
+    },
+    {
+      "comparison": "telemetry",
+      "metric": "final_accuracy",
+      "scope": "attacked_stress_seed_mean",
+      "n_seeds": 2,
+      "mean_pp": -0.09999999999999974,
+      "ci95_pp": [
+        -0.19999999999999948,
+        0.0
+      ]
+    },
+    {
+      "comparison": "telemetry",
+      "metric": "final_accuracy",
+      "scope": "interaction_stress_minus_hfl_trace",
+      "n_seeds": 2,
+      "mean_pp": -0.1499999999999998,
+      "ci95_pp": [
+        -0.2999999999999996,
+        0.0
+      ],
+      "assessment": "pilot only; no inferential conclusion"
+    },
+    {
+      "comparison": "telemetry",
+      "metric": "final_accuracy",
+      "scope": "interaction_stress_minus_hfl_ideal",
+      "n_seeds": 2,
+      "mean_pp": -0.09999999999999974,
+      "ci95_pp": [
+        -0.19999999999999948,
+        0.0
+      ]
+    },
+    {
+      "comparison": "telemetry",
+      "metric": "mean_round_accuracy",
+      "scope": "alie_hfl_ideal",
+      "n_seeds": 2,
+      "mean_pp": 0.0,
+      "ci95_pp": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "comparison": "telemetry",
+      "metric": "mean_round_accuracy",
+      "scope": "alie_hfl_trace",
+      "n_seeds": 2,
+      "mean_pp": 0.0,
+      "ci95_pp": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "comparison": "telemetry",
+      "metric": "mean_round_accuracy",
+      "scope": "alie_hfl_trace_stress",
+      "n_seeds": 2,
+      "mean_pp": 0.0,
+      "ci95_pp": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "comparison": "telemetry",
+      "metric": "mean_round_accuracy",
+      "scope": "sign_flip_hfl_ideal",
+      "n_seeds": 2,
+      "mean_pp": 0.0,
+      "ci95_pp": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "comparison": "telemetry",
+      "metric": "mean_round_accuracy",
+      "scope": "sign_flip_hfl_trace",
+      "n_seeds": 2,
+      "mean_pp": 0.050000000000000044,
+      "ci95_pp": [
+        0.0,
+        0.10000000000000009
+      ]
+    },
+    {
+      "comparison": "telemetry",
+      "metric": "mean_round_accuracy",
+      "scope": "sign_flip_hfl_trace_stress",
+      "n_seeds": 2,
+      "mean_pp": -0.10000000000000009,
+      "ci95_pp": [
+        -0.20000000000000018,
+        0.0
+      ]
+    },
+    {
+      "comparison": "telemetry",
+      "metric": "mean_round_accuracy",
+      "scope": "attacked_suite_seed_mean",
+      "n_seeds": 2,
+      "mean_pp": -0.008333333333333342,
+      "ci95_pp": [
+        -0.016666666666666684,
+        0.0
+      ]
+    },
+    {
+      "comparison": "telemetry",
+      "metric": "mean_round_accuracy",
+      "scope": "attacked_stress_seed_mean",
+      "n_seeds": 2,
+      "mean_pp": -0.050000000000000044,
+      "ci95_pp": [
+        -0.10000000000000009,
+        0.0
+      ]
+    },
+    {
+      "comparison": "telemetry",
+      "metric": "mean_round_accuracy",
+      "scope": "interaction_stress_minus_hfl_trace",
+      "n_seeds": 2,
+      "mean_pp": -0.07500000000000007,
+      "ci95_pp": [
+        -0.15000000000000013,
+        0.0
+      ]
+    },
+    {
+      "comparison": "telemetry",
+      "metric": "mean_round_accuracy",
+      "scope": "interaction_stress_minus_hfl_ideal",
+      "n_seeds": 2,
+      "mean_pp": -0.050000000000000044,
+      "ci95_pp": [
+        -0.10000000000000009,
+        0.0
+      ]
+    },
+    {
+      "comparison": "packet_mask",
+      "metric": "final_accuracy",
+      "scope": "alie_hfl_ideal",
+      "n_seeds": 2,
+      "mean_pp": 0.0,
+      "ci95_pp": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "comparison": "packet_mask",
+      "metric": "final_accuracy",
+      "scope": "alie_hfl_trace",
+      "n_seeds": 2,
+      "mean_pp": -0.10000000000000009,
+      "ci95_pp": [
+        -0.20000000000000018,
+        0.0
+      ]
+    },
+    {
+      "comparison": "packet_mask",
+      "metric": "final_accuracy",
+      "scope": "alie_hfl_trace_stress",
+      "n_seeds": 2,
+      "mean_pp": 0.0,
+      "ci95_pp": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "comparison": "packet_mask",
+      "metric": "final_accuracy",
+      "scope": "sign_flip_hfl_ideal",
+      "n_seeds": 2,
+      "mean_pp": 0.0,
+      "ci95_pp": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "comparison": "packet_mask",
+      "metric": "final_accuracy",
+      "scope": "sign_flip_hfl_trace",
+      "n_seeds": 2,
+      "mean_pp": 0.0,
+      "ci95_pp": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "comparison": "packet_mask",
+      "metric": "final_accuracy",
+      "scope": "sign_flip_hfl_trace_stress",
+      "n_seeds": 2,
+      "mean_pp": -0.20000000000000018,
+      "ci95_pp": [
+        -0.40000000000000036,
+        0.0
+      ]
+    },
+    {
+      "comparison": "packet_mask",
+      "metric": "final_accuracy",
+      "scope": "attacked_suite_seed_mean",
+      "n_seeds": 2,
+      "mean_pp": -0.050000000000000044,
+      "ci95_pp": [
+        -0.10000000000000009,
+        0.0
+      ]
+    },
+    {
+      "comparison": "packet_mask",
+      "metric": "final_accuracy",
+      "scope": "attacked_stress_seed_mean",
+      "n_seeds": 2,
+      "mean_pp": -0.10000000000000009,
+      "ci95_pp": [
+        -0.20000000000000018,
+        0.0
+      ]
+    },
+    {
+      "comparison": "packet_mask",
+      "metric": "final_accuracy",
+      "scope": "interaction_stress_minus_hfl_trace",
+      "n_seeds": 2,
+      "mean_pp": -0.050000000000000044,
+      "ci95_pp": [
+        -0.10000000000000009,
+        0.0
+      ]
+    },
+    {
+      "comparison": "packet_mask",
+      "metric": "final_accuracy",
+      "scope": "interaction_stress_minus_hfl_ideal",
+      "n_seeds": 2,
+      "mean_pp": -0.10000000000000009,
+      "ci95_pp": [
+        -0.20000000000000018,
+        0.0
+      ]
+    },
+    {
+      "comparison": "packet_mask",
+      "metric": "mean_round_accuracy",
+      "scope": "alie_hfl_ideal",
+      "n_seeds": 2,
+      "mean_pp": 0.0,
+      "ci95_pp": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "comparison": "packet_mask",
+      "metric": "mean_round_accuracy",
+      "scope": "alie_hfl_trace",
+      "n_seeds": 2,
+      "mean_pp": -0.050000000000000044,
+      "ci95_pp": [
+        -0.10000000000000009,
+        0.0
+      ]
+    },
+    {
+      "comparison": "packet_mask",
+      "metric": "mean_round_accuracy",
+      "scope": "alie_hfl_trace_stress",
+      "n_seeds": 2,
+      "mean_pp": 0.0,
+      "ci95_pp": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "comparison": "packet_mask",
+      "metric": "mean_round_accuracy",
+      "scope": "sign_flip_hfl_ideal",
+      "n_seeds": 2,
+      "mean_pp": 0.0,
+      "ci95_pp": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "comparison": "packet_mask",
+      "metric": "mean_round_accuracy",
+      "scope": "sign_flip_hfl_trace",
+      "n_seeds": 2,
+      "mean_pp": 0.0,
+      "ci95_pp": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "comparison": "packet_mask",
+      "metric": "mean_round_accuracy",
+      "scope": "sign_flip_hfl_trace_stress",
+      "n_seeds": 2,
+      "mean_pp": -0.10000000000000009,
+      "ci95_pp": [
+        -0.20000000000000018,
+        0.0
+      ]
+    },
+    {
+      "comparison": "packet_mask",
+      "metric": "mean_round_accuracy",
+      "scope": "attacked_suite_seed_mean",
+      "n_seeds": 2,
+      "mean_pp": -0.025000000000000022,
+      "ci95_pp": [
+        -0.050000000000000044,
+        0.0
+      ]
+    },
+    {
+      "comparison": "packet_mask",
+      "metric": "mean_round_accuracy",
+      "scope": "attacked_stress_seed_mean",
+      "n_seeds": 2,
+      "mean_pp": -0.050000000000000044,
+      "ci95_pp": [
+        -0.10000000000000009,
+        0.0
+      ]
+    },
+    {
+      "comparison": "packet_mask",
+      "metric": "mean_round_accuracy",
+      "scope": "interaction_stress_minus_hfl_trace",
+      "n_seeds": 2,
+      "mean_pp": -0.025000000000000022,
+      "ci95_pp": [
+        -0.050000000000000044,
+        0.0
+      ]
+    },
+    {
+      "comparison": "packet_mask",
+      "metric": "mean_round_accuracy",
+      "scope": "interaction_stress_minus_hfl_ideal",
+      "n_seeds": 2,
+      "mean_pp": -0.050000000000000044,
+      "ci95_pp": [
+        -0.10000000000000009,
+        0.0
+      ]
+    },
+    {
+      "comparison": "full_context",
+      "metric": "final_accuracy",
+      "scope": "alie_hfl_ideal",
+      "n_seeds": 2,
+      "mean_pp": 0.0,
+      "ci95_pp": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "comparison": "full_context",
+      "metric": "final_accuracy",
+      "scope": "alie_hfl_trace",
+      "n_seeds": 2,
+      "mean_pp": -0.10000000000000009,
+      "ci95_pp": [
+        -0.20000000000000018,
+        0.0
+      ]
+    },
+    {
+      "comparison": "full_context",
+      "metric": "final_accuracy",
+      "scope": "alie_hfl_trace_stress",
+      "n_seeds": 2,
+      "mean_pp": 0.0,
+      "ci95_pp": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "comparison": "full_context",
+      "metric": "final_accuracy",
+      "scope": "sign_flip_hfl_ideal",
+      "n_seeds": 2,
+      "mean_pp": 0.0,
+      "ci95_pp": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "comparison": "full_context",
+      "metric": "final_accuracy",
+      "scope": "sign_flip_hfl_trace",
+      "n_seeds": 2,
+      "mean_pp": 0.10000000000000009,
+      "ci95_pp": [
+        0.0,
+        0.20000000000000018
+      ]
+    },
+    {
+      "comparison": "full_context",
+      "metric": "final_accuracy",
+      "scope": "sign_flip_hfl_trace_stress",
+      "n_seeds": 2,
+      "mean_pp": -0.3999999999999997,
+      "ci95_pp": [
+        -0.7999999999999994,
+        0.0
+      ]
+    },
+    {
+      "comparison": "full_context",
+      "metric": "final_accuracy",
+      "scope": "attacked_suite_seed_mean",
+      "n_seeds": 2,
+      "mean_pp": -0.06666666666666661,
+      "ci95_pp": [
+        -0.13333333333333322,
+        0.0
+      ]
+    },
+    {
+      "comparison": "full_context",
+      "metric": "final_accuracy",
+      "scope": "attacked_stress_seed_mean",
+      "n_seeds": 2,
+      "mean_pp": -0.19999999999999984,
+      "ci95_pp": [
+        -0.3999999999999997,
+        0.0
+      ]
+    },
+    {
+      "comparison": "full_context",
+      "metric": "final_accuracy",
+      "scope": "interaction_stress_minus_hfl_trace",
+      "n_seeds": 2,
+      "mean_pp": -0.19999999999999984,
+      "ci95_pp": [
+        -0.3999999999999997,
+        0.0
+      ]
+    },
+    {
+      "comparison": "full_context",
+      "metric": "final_accuracy",
+      "scope": "interaction_stress_minus_hfl_ideal",
+      "n_seeds": 2,
+      "mean_pp": -0.19999999999999984,
+      "ci95_pp": [
+        -0.3999999999999997,
+        0.0
+      ]
+    },
+    {
+      "comparison": "full_context",
+      "metric": "mean_round_accuracy",
+      "scope": "alie_hfl_ideal",
+      "n_seeds": 2,
+      "mean_pp": 0.0,
+      "ci95_pp": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "comparison": "full_context",
+      "metric": "mean_round_accuracy",
+      "scope": "alie_hfl_trace",
+      "n_seeds": 2,
+      "mean_pp": -0.050000000000000044,
+      "ci95_pp": [
+        -0.10000000000000009,
+        0.0
+      ]
+    },
+    {
+      "comparison": "full_context",
+      "metric": "mean_round_accuracy",
+      "scope": "alie_hfl_trace_stress",
+      "n_seeds": 2,
+      "mean_pp": 0.0,
+      "ci95_pp": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "comparison": "full_context",
+      "metric": "mean_round_accuracy",
+      "scope": "sign_flip_hfl_ideal",
+      "n_seeds": 2,
+      "mean_pp": 0.0,
+      "ci95_pp": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "comparison": "full_context",
+      "metric": "mean_round_accuracy",
+      "scope": "sign_flip_hfl_trace",
+      "n_seeds": 2,
+      "mean_pp": 0.050000000000000044,
+      "ci95_pp": [
+        0.0,
+        0.10000000000000009
+      ]
+    },
+    {
+      "comparison": "full_context",
+      "metric": "mean_round_accuracy",
+      "scope": "sign_flip_hfl_trace_stress",
+      "n_seeds": 2,
+      "mean_pp": -0.20000000000000018,
+      "ci95_pp": [
+        -0.40000000000000036,
+        0.0
+      ]
+    },
+    {
+      "comparison": "full_context",
+      "metric": "mean_round_accuracy",
+      "scope": "attacked_suite_seed_mean",
+      "n_seeds": 2,
+      "mean_pp": -0.03333333333333337,
+      "ci95_pp": [
+        -0.06666666666666674,
+        0.0
+      ]
+    },
+    {
+      "comparison": "full_context",
+      "metric": "mean_round_accuracy",
+      "scope": "attacked_stress_seed_mean",
+      "n_seeds": 2,
+      "mean_pp": -0.10000000000000009,
+      "ci95_pp": [
+        -0.20000000000000018,
+        0.0
+      ]
+    },
+    {
+      "comparison": "full_context",
+      "metric": "mean_round_accuracy",
+      "scope": "interaction_stress_minus_hfl_trace",
+      "n_seeds": 2,
+      "mean_pp": -0.10000000000000009,
+      "ci95_pp": [
+        -0.20000000000000018,
+        0.0
+      ]
+    },
+    {
+      "comparison": "full_context",
+      "metric": "mean_round_accuracy",
+      "scope": "interaction_stress_minus_hfl_ideal",
+      "n_seeds": 2,
+      "mean_pp": -0.10000000000000009,
+      "ci95_pp": [
+        -0.20000000000000018,
+        0.0
+      ]
+    }
+  ],
+  "interpretation": "Pipeline pilot only; no defense-ranking or significance claims."
+}

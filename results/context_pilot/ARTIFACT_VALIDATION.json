@@ -1,0 +1,12 @@
+{
+  "planned_runs": 72,
+  "terminal_runs": 72,
+  "diverged_runs": 0,
+  "finite_checkpoints": 72,
+  "paired_seed_partitions": 2,
+  "source_sha256": "d77bc838692ce3e72b4c39fbdf507d77c9c8441eb7d4ed46cdecca79abca8ed6",
+  "dataset_sha256": "8da0e6ac90bcbf097c1c0cd16a9fa0d2db7a4afe1a81ba7c03fbc66b88ea735e",
+  "trace_sha256": "68785bd1d5c03ef6e08b0bb46595aca785498f461ee0e48c40fbbeb921381a60",
+  "problems": [],
+  "valid": true
+}

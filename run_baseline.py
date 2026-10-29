@@ -83,6 +83,14 @@ def main(argv=None):
             "Shannon capacity upper bound; protocol overhead and retransmissions are excluded"
         ),
         "packet_error_model": "logistic PER curve around configured SINR threshold",
+        "delivered_parameter_noise": (
+            "none; delivered digital parameters are unchanged" if cfg.noise_scale == 0
+            else "simulated additive parameter noise; not a measured digital-link effect"
+        ),
+        "context_trust": (
+            "BS-observed or authenticated telemetry is assumed; adversarial telemetry "
+            "spoofing is not modelled"
+        ),
         "staleness_model": (
             "deadline excess is converted to round staleness; accept mode is a same-round "
             "down-weighted approximation rather than an event-driven asynchronous queue"
@@ -106,7 +114,7 @@ def main(argv=None):
             "samples_per_class": cfg.root_samples_per_class,
             "total_samples": int(len(root_idx)),
             "excluded_from_all_client_partitions": True,
-            "used_by_aggregator": cfg.aggregator in {"ccra", "ccra_noctx", "fltrust"},
+            "used_by_aggregator": cfg.aggregator in {"ccra", "ccra_noctx", "ccra_maskonly", "fltrust"},
             "fltrust_step_policy": (
                 "repeat the root set to match the median optimizer-step count of "
                 "the received clients in each cell"
@@ -129,7 +137,7 @@ def main(argv=None):
     print(f"Model: {type(model).__name__} ({count_params(model):,} params) | aggregator={cfg.aggregator}")
 
     root_client = None
-    if cfg.aggregator in {"ccra", "ccra_noctx", "fltrust"}:
+    if cfg.aggregator in {"ccra", "ccra_noctx", "ccra_maskonly", "fltrust"}:
         root_client = DroneClient(-1, train_ds, root_numpy, cfg, device)
         print(f"Trusted reference set: {len(root_idx)} images (disjoint from client data)")
 

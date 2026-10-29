@@ -20,3 +20,10 @@ results/trace_validation/
 # generated files to Git.
 results/benchmark_gpu/seed*/
 results/benchmark_gpu/benchmark_raw_results.tar.gz
+
+# Context studies retain compact reports, not per-run logs/configs/checkpoints.
+results/context_*/seed*/
+results/context_*/study_manifest.json
+
+# In-progress recovery mirror; publish compact reports after final validation.
+results/context_final_gpu/
