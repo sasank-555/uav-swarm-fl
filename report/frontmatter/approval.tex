@@ -1,28 +1,27 @@
-% Specimen B: approval sheet. First auxiliary page (no dedication), so it is
-% page i but shows no number (guidelines 3.6, 3.9).
+% Approval of the viva-voce board (template page ii; listed as "Certificate of Approval").
 \clearpage
-\setcounter{page}{1}
+\setcounter{page}{2}
 \thispagestyle{empty}
+\phantomsection\addcontentsline{toc}{chapter}{Certificate of Approval}
 \begin{center}
-{\Large\bfseries Approval for B.Tech Project Report\par}
+\textbf{APPROVAL OF THE VIVA-VOCE BOARD}
 \end{center}
-\vspace{12mm}
+\vspace{4mm}
+\hfill DD/MM/YYYY
 
+\vspace{6mm}
 {\sloppy
-\noindent This Project Work entitled \textbf{``\ProjectTitle''} by
-{\renewcommand{\Student}[2]{\StudentSep#1 (#2)\def\StudentSep{, }}\def\StudentSep{}\StudentList}
-is approved for the degree of \Degree{} in \Program.\par}
+Certified that the project report entitled \MakeUppercase{\ProjectTitle} submitted by
+{\renewcommand{\Student}[2]{\StudentSep\MakeUppercase{#1} (#2)\def\StudentSep{, }}\def\StudentSep{}\StudentList}
+to the National Institute of Technology, Warangal, for the award of the degree of
+\Degree{} in \Program{} has been accepted by the examiners and that the students have
+successfully defended the work in the viva-voce examination held today.\par}
 
-\vspace{25mm}
-\noindent
-\begin{tabularx}{\textwidth}{@{}X X@{}}
-\textbf{Examiners} & \textbf{Supervisor} \\[18mm]
-\rule{55mm}{0.4pt} & \rule{55mm}{0.4pt} \\
- & \Supervisor \\[14mm]
-\rule{55mm}{0.4pt} & \textbf{Chairman} \\[18mm]
- & \rule{55mm}{0.4pt} \\
-\end{tabularx}
+\vspace{30mm}
+\noindent(Examiner)\hfill(Examiner)\hfill(Examiner)
 
-\vspace{20mm}
-\noindent Date: \rule{40mm}{0.4pt}\par
-\noindent Place: \Place
+\vspace{30mm}
+\noindent(Supervisor)\hfill(Head of the Department)
+
+\vspace{30mm}
+\noindent\hfill(Chairman)

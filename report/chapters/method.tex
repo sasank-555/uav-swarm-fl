@@ -1,8 +1,9 @@
-\chapter{System Model and Methodology}
+\chapter{Theoretical Study}
 \label{ch:method}
 
-This chapter describes the simulated system, the attacker, the aggregation rules
-compared, and the protocol used to evaluate them. All of it is implemented in the
+This chapter describes the simulated system, the attacker and the aggregation rules
+compared, and analyses the reputation update. Chapter~\ref{ch:results} describes
+how they were evaluated. All of it is implemented in the
 project repository; file names are given where they help locate the code.
 
 \section{Hierarchical Federated Learning for a UAV Swarm}
@@ -90,7 +91,7 @@ UAV $k$'s link (zero for UAVs outside the jammed sector).
 
 \subsection{Measured-Trace Channel}
 For realism we replay a measured UAV link from DeepSense~6G
-Scenario~23~\cite{alkhateeb2023deepsense,charan2025drone}, in which a drone flies
+Scenario~23 \citep{alkhateeb2023deepsense,charan2025drone}, in which a drone flies
 around a ground receiver that records 60\,GHz beam powers together with position,
 altitude and speed. The dataset's power values are uncalibrated, so only their
 variation relative to the median is used:
@@ -123,11 +124,11 @@ of the following (\texttt{fl/attacks.py}, \texttt{fl/client.py}):
 \begin{itemize}
 \item \textbf{Label flip} (data poisoning): train on labels mapped $c\mapsto 9-c$.
 \item \textbf{Sign flip}: send $-\lambda\boldsymbol\Delta_k$ with $\lambda=5$.
-\item \textbf{ALIE-style}~\cite{baruch2019alie}: send
+\item \textbf{ALIE-style} \citep{baruch2019alie}: send
   $\boldsymbol\mu-z\,\boldsymbol\sigma\odot\mathrm{sign}(\boldsymbol\mu)$ with $z=1.5$,
   where $\boldsymbol\mu$ and $\boldsymbol\sigma$ are the mean and standard deviation of
   the honest updates in the attacker's cell.
-\item \textbf{IPM}~\cite{xie2019ipm}: send $-\epsilon\boldsymbol\mu$ with $\epsilon=0.5$.
+\item \textbf{IPM} \citep{xie2019ipm}: send $-\epsilon\boldsymbol\mu$ with $\epsilon=0.5$.
 \end{itemize}
 The ALIE and IPM attackers know the honest updates of their cell, which is a strong
 assumption chosen to stress the defences. The BS's telemetry is assumed authentic;
@@ -138,13 +139,13 @@ All rules receive exactly the same inputs: the received updates, their masks, sa
 counts and telemetry (\texttt{fl/aggregators.py}).
 
 \subsection{Baselines}
-\textbf{FedAvg}~\cite{mcmahan2017fedavg} averages the received updates weighted by
+\textbf{FedAvg} \citep{mcmahan2017fedavg} averages the received updates weighted by
 $n_k$, with lost coordinates counted as zeros. \textbf{CosAvg}, the aggregation of the
-earlier UAV-FL work~\cite{liao2023tee} as re-implemented here, weights each update by
+earlier UAV-FL work \citep{liao2023tee} as re-implemented here, weights each update by
 $\max(0,\cos(\boldsymbol\Delta_k,\bar{\boldsymbol\Delta}))\,n_k$, where
 $\bar{\boldsymbol\Delta}$ is the FedAvg mean. \textbf{Coordinate-wise
-median}~\cite{yin2018median} takes the median of the delivered values of each
-parameter. \textbf{FLTrust}~\cite{cao2021fltrust} computes a root update $\mathbf{r}$
+median} \citep{yin2018median} takes the median of the delivered values of each
+parameter. \textbf{FLTrust} \citep{cao2021fltrust} computes a root update $\mathbf{r}$
 on $\mathcal{D}_0$ (with as many local steps as a typical UAV), weights each UAV by
 $\max(0,\cos)$ to $\mathbf{r}$ on delivered coordinates, and rescales each update to
 the norm of $\mathbf{r}$.
@@ -227,47 +228,3 @@ An honest UAV with skewed data has noisy scores, so on a weak link its reputatio
 tracks its worst rounds and falls below the gate $\tau$ more often. An attacker's
 scores are already near zero, so slowing its rewards adds little. Section~\ref{sec:mechanism}
 tests this prediction against the measured gate decisions.
-
-\section{Implementation and Verification}
-The framework is written in Python with PyTorch. Runs are configured by a single
-dataclass, and every run stores its full configuration, per-round history and final
-model. The repository contains 43 automated tests covering data partitioning, the
-FedAvg update, attack construction, every robust aggregator, the hierarchical server,
-handover logic, trace loading and the analysis code. A code review of the
-hierarchical extension found three problems, which were fixed before the controlled
-study was run: the reputation rule shielded jammed attackers, the no-context
-ablation still read packet delivery ratios, and FLTrust's root update took too few
-training steps.
-
-\section{Experimental Protocol}
-\subsection{Preliminary Study}
-The first comparison used the synthetic jammed channel with one BS, a 30\% label-flip
-attack, 30 rounds and a single seed. It compared FedAvg, CosAvg and an early version
-of CCRA under four scenarios: no attack or attack, each with an ideal or a jammed
-lossy channel. Its purpose was to check that the pipeline worked and to estimate
-effect sizes.
-
-\subsection{Controlled Ablation Study}
-\label{sec:protocol}
-The main study used a full factorial design: six aggregators (FedAvg, median,
-FLTrust and the three CCRA variants), four attack settings (clean, sign flip, ALIE,
-IPM), three channel conditions (ideal; trace at 15\,dB; trace at 5\,dB) and
-\NumSeeds{} seeds, for \NumRuns{} runs of 100 rounds each with $K=10$, $B=3$, $E=5$
-and $\alpha=0.5$. Within a seed, the data split, initial model, attacker identities
-and trace positions are identical across methods, so every comparison is paired. The
-runs were executed on an NVIDIA A100 GPU.
-
-The analysis plan was fixed before any run:
-\begin{itemize}
-\item The \emph{primary} quantity is the telemetry effect under stress,
-  $[(\text{CCRA}-\text{mask-only})_{5\,\mathrm{dB}}-(\text{CCRA}-\text{mask-only})_{15\,\mathrm{dB}}]$,
-  averaged over the three attacks within each seed.
-\item An effect counts as practically meaningful only if its 95\% interval lies
-  entirely beyond $\pm1$ percentage point.
-\item Intervals are percentile bootstraps over seeds with 10{,}000 resamples; rounds
-  and attack cells are not treated as independent samples.
-\item A run that diverges numerically is scored at chance accuracy (10\%) instead of
-  being dropped, so unstable methods cannot look better by losing their worst runs.
-\item All other contrasts are exploratory and are not adjusted for multiple
-  comparisons.
-\end{itemize}

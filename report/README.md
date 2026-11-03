@@ -1,41 +1,41 @@
 # B.Tech project report (NIT Warangal)
 
 LaTeX source of the Phase I project report. [`main.pdf`](main.pdf) is the latest
-compiled copy. The layout follows the institute's *Guidelines for Preparation of B.Tech
-Report*; the comments in `main.tex` give the guideline section for each setting.
+compiled copy. The layout follows the institute's LaTeX thesis template
+(*Template_for_Thesis*, 2024), adapted from a PhD thesis to a B.Tech report:
+- Computer Modern 12 pt, 1.5 line spacing, 30 mm left and 20 mm right margins
+- title page with the institute emblem; viva-voce approval, certificate, declaration,
+  acknowledgements, abstract with index terms
+- blue linked contents, then lists of figures, tables, abbreviations and symbols
+- left-aligned "Chapter N" heads, running headers with rules on continuation pages
+- author-year references, followed by the appendices
+
+Chapter and front-page positions were measured against the template PDF and match it
+to within a few points.
 
 | Path | What it is |
 |---|---|
-| `info.tex` | **Edit this first:** title, student names and roll numbers, supervisor, HOD, department, year |
+| `info.tex` | **Edit this first:** title, students and roll numbers, guide, HOD, department, month and year |
 | `main.tex` | Page layout and document order |
-| `frontmatter/` | Title sheet, approval, declaration, certificate (Specimens A–D), abstract, abbreviations, publications, acknowledgements |
-| `chapters/` | Introduction, literature review, method, results, conclusions, appendices |
-| `refs.bib` | References (IEEE style) |
-| `figures/`, `generated/` | Copied in by `python scripts/make_paper_figures.py`; do not edit by hand |
-
-Put the institute emblem at `figures/nitw_logo.png` and the title sheet picks it up
-automatically.
-
-## Matching the department's sample report
-
-The guideline measurements are set as lengths near the top of `main.tex`. If the
-sample report looks different, adjust these instead of editing chapters:
-- `\ChapterTop`: extra space above "Chapter N" (default 75 mm)
-- `\SecGap`: space around section headings (default 15 mm)
-- `\ParGap`: space between paragraphs (default 6 pt)
+| `frontmatter/` | Title, approval, certificate, declaration, acknowledgements, abstract, abbreviations and symbols |
+| `chapters/` | Introduction, Literature Review, Theoretical Study, Experimental Study, Conclusions and Future Scope of Study, Appendices A and B |
+| `refs.bib` | References |
+| `figures/nitw_logo.jpg` | Institute emblem, taken from the template |
+| `figures/` (others), `generated/` | Copied in by `python scripts/make_paper_figures.py`; do not edit by hand |
 
 ## Compile
 
 **Overleaf:** zip this `report/` folder, then choose *New Project → Upload Project*.
 The default compiler (pdfLaTeX) and BibTeX work without changes.
 
-**Locally:** `tectonic -X compile main.tex`. Tectonic prints harmless font warnings
-that pdfLaTeX does not.
+**Locally:** `tectonic -X compile main.tex`.
 
 ## Before submission
 
-- Fill in `info.tex`.
-- Check the plagiarism score (the limit is 30%). The report is written separately
-  from the paper, but both describe the same study.
+- Fill in the remaining placeholders in `info.tex`: the HOD's name, and confirm the
+  roll numbers and the guide's title.
+- The certificate is meant to be printed on departmental letterhead.
+- Check the plagiarism score. The report is written separately from the paper, but
+  both describe the same study.
 - Confirm the literature-review entries for the IEEE letters against their full texts.
   Table 2.1's caption says these entries still need checking.

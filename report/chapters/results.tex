@@ -1,12 +1,57 @@
-\chapter{Results and Discussion}
+\chapter{Experimental Study}
 \label{ch:results}
 
-The results are presented in the order the work was done: the FedAvg baseline, the
-preliminary single-seed study, and the controlled \NumRuns-run study. Every number in
-Section~\ref{sec:controlled} is generated from the committed run-level data by the
-script described in Appendix~\ref{app:repro}.
+This chapter describes how the framework was implemented and verified, the
+protocol of each experiment, and the results, in the order the work was done: the
+FedAvg baseline, the preliminary single-seed study, and the controlled
+\NumRuns-run study. Every number in Section~\ref{sec:controlled} is generated from
+the committed run-level data by the script described in Appendix~B.
 
-\section{FedAvg Baseline}
+\section{Implementation and Verification}
+The framework is written in Python with PyTorch. Runs are configured by a single
+dataclass, and every run stores its full configuration, per-round history and final
+model. The repository contains 43 automated tests covering data partitioning, the
+FedAvg update, attack construction, every robust aggregator, the hierarchical server,
+handover logic, trace loading and the analysis code. A code review of the
+hierarchical extension found three problems, which were fixed before the controlled
+study was run: the reputation rule shielded jammed attackers, the no-context
+ablation still read packet delivery ratios, and FLTrust's root update took too few
+training steps.
+
+\section{Experimental Protocol}
+\subsection{Preliminary Study}
+The first comparison used the synthetic jammed channel with one BS, a 30\% label-flip
+attack, 30 rounds and a single seed. It compared FedAvg, CosAvg and an early version
+of CCRA under four scenarios: no attack or attack, each with an ideal or a jammed
+lossy channel. Its purpose was to check that the pipeline worked and to estimate
+effect sizes.
+
+\subsection{Controlled Ablation Study}
+\label{sec:protocol}
+The main study used a full factorial design: six aggregators (FedAvg, median,
+FLTrust and the three CCRA variants), four attack settings (clean, sign flip, ALIE,
+IPM), three channel conditions (ideal; trace at 15\,dB; trace at 5\,dB) and
+\NumSeeds{} seeds, for \NumRuns{} runs of 100 rounds each with $K=10$, $B=3$, $E=5$
+and $\alpha=0.5$. Within a seed, the data split, initial model, attacker identities
+and trace positions are identical across methods, so every comparison is paired. The
+runs were executed on an NVIDIA A100 GPU.
+
+The analysis plan was fixed before any run:
+\begin{itemize}
+\item The \emph{primary} quantity is the telemetry effect under stress,
+  $[(\text{CCRA}-\text{mask-only})_{5\,\mathrm{dB}}-(\text{CCRA}-\text{mask-only})_{15\,\mathrm{dB}}]$,
+  averaged over the three attacks within each seed.
+\item An effect counts as practically meaningful only if its 95\% interval lies
+  entirely beyond $\pm1$ percentage point.
+\item Intervals are percentile bootstraps over seeds with 10{,}000 resamples; rounds
+  and attack cells are not treated as independent samples.
+\item A run that diverges numerically is scored at chance accuracy (10\%) instead of
+  being dropped, so unstable methods cannot look better by losing their worst runs.
+\item All other contrasts are exploratory and are not adjusted for multiple
+  comparisons.
+\end{itemize}
+
+\section{FedAvg Baseline Results}
 The first objective was a working FL pipeline without any defence. Ten UAVs trained
 TacticalEdgeCNN for 50 rounds with two local epochs, SGD (learning rate 0.01,
 momentum 0.9, batch size 64), on one BS with an ideal channel.
@@ -37,7 +82,7 @@ Non-IID data cost about 2.4 percentage points, and neither curve had fully level
 off by round 50. These numbers set the reference for the attack experiments: any
 defence should keep accuracy close to them when no attack is present.
 
-\section{Preliminary Study}
+\section{Preliminary Study Results}
 The preliminary study compared FedAvg, CosAvg and an early version of CCRA with one
 BS, 30 rounds, one local epoch and a single seed. Three of the ten UAVs flipped their
 labels, and in the jammed scenarios a ground jammer targeted three honest UAVs.
@@ -91,7 +136,7 @@ These results were encouraging, but they could not support a claim:
 \end{itemize}
 These limitations defined the controlled study.
 
-\section{Controlled Ablation Study}
+\section{Controlled Ablation Study Results}
 \label{sec:controlled}
 All \NumRuns{} runs finished and were validated. The trace delivered on average
 \PdrTrace\% of packets at 15\,dB and \PdrStress\% at 5\,dB.
@@ -233,7 +278,7 @@ change.
 \item \textbf{Scope of learning task.} One dataset, one model, ten UAVs and fixed
   attack strengths were used.
 \item \textbf{Attacker model.} Telemetry is assumed authentic, and adaptive attacks on
-  the reputation itself~\cite{liu2026evade} were not tested.
+  the reputation itself \citep{liu2026evade} were not tested.
 \item \textbf{Statistics.} Ten seeds give approximate intervals; secondary contrasts
   are not adjusted for multiple comparisons. Any revised rule must be tested on new
   seeds, not re-tuned on these ten.

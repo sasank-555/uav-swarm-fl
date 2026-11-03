@@ -1,31 +1,32 @@
-% Specimen A: title sheet (first printed page, no page number).
+% Title page, laid out as in the institute template (page i, no number shown).
 \begin{titlepage}
 \centering
-\onehalfspacing
-{\fontsize{20}{26}\selectfont\bfseries \ProjectTitle\par}
-\vspace{18mm}
-{\large Submitted in partial fulfilment of the requirements of the degree of\par}
-\vspace{6mm}
-{\Large\bfseries \Degree\par}
-\vspace{4mm}
-{\large in \Program\par}
-\vspace{10mm}
-{\large by\par}
-\vspace{6mm}
-{\large
-\begin{tabular}{l@{\hspace{12mm}}l}
+\setstretch{1.2}
+{\Large\bfseries \MakeUppercase{\ProjectTitle}\par}
+\vspace{12mm}
+{\bfseries\itshape Project report submitted to the\\
+National Institute of Technology Warangal\\
+For award of the degree\par}
+\vspace{3mm}
+{\bfseries\itshape of\par}
+\vspace{2mm}
+{\large\bfseries \Degree\par}
+{\large\bfseries in \Program\par}
+\vspace{2mm}
+{\large\bfseries\itshape by\par}
+\vspace{3mm}
+{\large\bfseries
+\begin{tabular}{l@{\hspace{10mm}}l}
 \StudentList
 \end{tabular}\par}
-\vspace{12mm}
-{\large Supervisor:\par}
-\vspace{2mm}
-{\large\bfseries \Supervisor\par}
-{\large \SupervisorDesignation\par}
-\vfill
-\IfFileExists{figures/nitw_logo.png}{\includegraphics[width=40mm]{nitw_logo.png}\par\vspace{8mm}}{}
-{\large \Department\par}
-\vspace{2mm}
-{\Large\bfseries NATIONAL INSTITUTE OF TECHNOLOGY WARANGAL\par}
 \vspace{4mm}
-{\large \SubmissionYear\par}
+{\large Under the guidance of\par}
+\vspace{1mm}
+{\large\bfseries \Supervisor\par}
+\vfill
+\IfFileExists{figures/nitw_logo.jpg}{\includegraphics[height=42mm]{nitw_logo.jpg}\par}{}
+\vfill
+{\large\bfseries \MakeUppercase{\Department}\\
+NATIONAL INSTITUTE OF TECHNOLOGY WARANGAL\\
+\SubmissionMonth\ \SubmissionYear\par}
 \end{titlepage}
