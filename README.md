@@ -27,7 +27,8 @@ a four-page IEEE letter: [`paper/main.pdf`](paper/main.pdf) ([source and build n
 | ![](paper/figures/accuracy_vs_channel.png) | ![](paper/figures/ablation_contrasts.png) | ![](paper/figures/gate_rates.png) |
 
 Every figure, table and number in the paper is regenerated from the committed CSV by
-`python scripts/make_paper_figures.py`. The B.Tech report will live in [`report/`](report/README.md).
+`python scripts/make_paper_figures.py`, which also copies them into the Phase I
+B.Tech report: [`report/main.pdf`](report/main.pdf) ([source and layout notes](report/README.md)).
 
 ## Month 1: Foundation & Baseline (weeks 1–4)
 

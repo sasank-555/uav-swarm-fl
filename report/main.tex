@@ -1,0 +1,106 @@
+% B.Tech project report, NIT Warangal.
+% Layout follows "Guidelines for Preparation of B.Tech Report" (section numbers in comments).
+% Compiles on Overleaf with pdfLaTeX + BibTeX. Figures and numbers in figures/ and
+% generated/ are copied in by scripts/make_paper_figures.py; do not edit them by hand.
+\documentclass[12pt,a4paper,oneside,openany]{report}
+
+% 2.1.2-2.1.4: A4, Times 12 pt, 1.5 spacing, text 160 x 245 mm, no running header.
+\usepackage[a4paper,left=30mm,right=20mm,top=30mm,bottom=22mm,footskip=13mm]{geometry}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext,newtxmath} % Times text and maths; provides the AMS symbols
+\usepackage{setspace}
+\onehalfspacing
+
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{booktabs,tabularx,array,longtable}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta}
+\usepackage[labelfont=bf]{caption}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{tocloft}
+\usepackage[nottoc]{tocbibind}
+\usepackage{cite}
+\usepackage[hidelinks]{hyperref}
+
+\input{info}
+\input{generated/numbers}
+
+% 2.1.7: paragraphs indented 12 mm. The guideline asks for generous separation;
+% \ParGap is the one knob to match the department's sample report.
+\newlength{\ParGap}\setlength{\ParGap}{6pt}
+\setlength{\parindent}{12mm}
+\setlength{\parskip}{\ParGap}
+
+% 2.2.1: chapter starts ~75 mm down, "Chapter N" and title centred, 18 pt bold,
+% 25 mm between number, title and first paragraph.
+\titleformat{\chapter}[display]
+  {\centering\bfseries\fontsize{18}{22}\selectfont}
+  {\chaptertitlename\ \thechapter}{25mm}{}
+\newlength{\ChapterTop}\setlength{\ChapterTop}{75mm}  % extra space above "Chapter N"
+\titlespacing*{\chapter}{0pt}{\ChapterTop}{25mm}
+% 2.2.2: section 16 pt, subsection 14 pt, bold, flush left, 15 mm around.
+\newlength{\SecGap}\setlength{\SecGap}{15mm}
+\titleformat{\section}{\bfseries\fontsize{16}{19}\selectfont}{\thesection}{1em}{}
+\titlespacing*{\section}{0pt}{\SecGap}{\SecGap}
+\titleformat{\subsection}{\bfseries\fontsize{14}{17}\selectfont}{\thesubsection}{1em}{}
+\titlespacing*{\subsection}{0pt}{\SecGap}{\SecGap}
+% Further subdivisions: unnumbered, not in contents.
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+\titleformat{\subsubsection}{\bfseries\itshape\normalsize}{}{0pt}{}
+\titlespacing*{\subsubsection}{0pt}{3ex}{1ex}
+
+% 3.8: contents with page numbers flushed right.
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\contentsname}{Contents}
+
+% Numbers used in prose.
+\newcommand{\pp}{\,pp}
+\newcommand{\ci}[2]{$[#1,\,#2]$}
+\newcommand{\Student}[2]{#1 & #2 \\}
+
+\begin{document}
+
+% ---------------------------------------------------------------- front matter
+\pagenumbering{roman}
+\input{frontmatter/title}
+\input{frontmatter/approval}
+\input{frontmatter/declaration}
+\input{frontmatter/certificate}
+\input{frontmatter/abstract}
+
+\clearpage
+\tableofcontents
+\clearpage
+\listoffigures
+\clearpage
+\listoftables
+\input{frontmatter/abbreviations}
+
+% ---------------------------------------------------------------- main text
+\clearpage
+\pagenumbering{arabic}
+\input{chapters/introduction}
+\input{chapters/literature}
+\input{chapters/method}
+\input{chapters/results}
+\input{chapters/conclusions}
+
+% 1.6: appendices numbered in Roman capitals, before the references.
+\appendix
+\renewcommand{\thechapter}{\Roman{chapter}}
+\input{chapters/appendix}
+
+% 1.7: literature cited, IEEE style.
+\bibliographystyle{IEEEtran}
+\bibliography{refs}
+
+% 1.8-1.9: publications, then acknowledgements.
+\input{frontmatter/publications}
+\input{frontmatter/acknowledgements}
+
+\end{document}

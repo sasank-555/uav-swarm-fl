@@ -114,7 +114,7 @@ $K$ UAVs train a model $\mathbf{w}\in\mathbb{R}^P$ and are served by $B$ BSs
 edge model $\mathbf{w}_b^{t}$, runs local SGD on its private data $\mathcal{D}_k$ and
 uploads $\boldsymbol{\Delta}_k^t$. BS $b$ aggregates the updates it receives into
 $\mathbf{w}_b^{t+1}=\mathbf{w}_b^{t}+\mathrm{Agg}(\cdot)$. Every $E$ rounds the BS
-models are averaged, weighted by cell population, and broadcast. Each BS also holds a
+models are averaged, weighted by each cell's number of training samples, and broadcast. Each BS also holds a
 small trusted root set $\mathcal{D}_0$, disjoint from all UAV data, on which it
 computes a reference update $\mathbf{r}_b^t$ each round, as in FLTrust~\cite{cao2021fltrust}.
 
