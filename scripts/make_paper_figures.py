@@ -101,9 +101,13 @@ def style():
 
 
 def save(fig, out: Path):
-    """PDF for LaTeX, PNG for the README and slides."""
-    fig.savefig(out)
-    fig.savefig(out.with_suffix(".png"), dpi=220)
+    """PDF for LaTeX, PNG for the README and slides.
+
+    Timestamps are omitted so rerunning the script leaves unchanged figures
+    byte-identical in Git.
+    """
+    fig.savefig(out, metadata={"CreationDate": None})
+    fig.savefig(out.with_suffix(".png"), dpi=220, metadata={"Software": None})
     plt.close(fig)
 
 
